@@ -1,0 +1,41 @@
+image: node:16.13.2
+
+before_script:
+  - yarn install --network-timeout 100000
+
+stages:
+  - lint
+  - test
+  - build
+  - deploy
+
+# use one cache for all job
+cache:
+  paths:
+    - node_modules
+    - "packages/*/node_modules"
+
+lint:
+  stage: lint
+  script:
+    - yarn lint
+
+test:
+  stage: test
+  script:
+    - yarn test
+
+build:
+  stage: build
+  script:
+    - yarn build
+    - tar zcvf frontend_demo.tar.gz build/
+  artifacts:
+    paths:
+      - "frontend_demo.tar.gz"
+
+deploy:
+  stage: deploy
+  before_script: []
+  script: echo "deployment script!"
+  when: manual
