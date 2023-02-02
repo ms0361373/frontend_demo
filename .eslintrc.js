@@ -59,5 +59,7 @@ module.exports = {
     'max-len': ['error', { code: 120 }],
     'react/display-name': 0,
     'no-plusplus': 0,
+    'react/react-in-jsx-scope': 'off',
+    'jest/valid-describe': 'off',
   },
 };
