@@ -6,7 +6,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <button onClick={() => callErrorLog()}>
-          Click Send Error
+          Click Send Error Log
         </button>
       </header>
     </div>
