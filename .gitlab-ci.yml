@@ -34,7 +34,7 @@ scan:
   stage: scan
   script:
     - yarn global add depcheck
-    - depcheck --json --ignores=eslint
+    - depcheck
 
 # build 階段：構建應用
 build:
