@@ -48,5 +48,6 @@ build:
 # deploy 階段：將 artifacts 複製到遠程伺服器
 deploy:
   stage: deploy
+  before_script: []
   script: echo "deployment script!"
   when: manual
