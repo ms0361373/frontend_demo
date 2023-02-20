@@ -1,41 +1,52 @@
+# 指定 GitLab CI/CD 運行的運行器
 image: node:16.13.2
 
 before_script:
   - yarn install --network-timeout 100000
 
+# 定義 CI/CD 階段
 stages:
   - lint
   - test
+  - scan
   - build
   - deploy
 
-# use one cache for all job
+# 使用 node_modules 緩存
 cache:
   paths:
-    - node_modules
-    - "packages/*/node_modules"
+    - node_modules/
 
+# lint 階段：運行 ESLint 代碼檢查工具
 lint:
   stage: lint
   script:
     - yarn lint
 
+# test 階段：運行 Jest 測試框架
 test:
   stage: test
   script:
     - yarn test
 
+# scan 階段：運行 OWASP Dependency-Check 進行依賴漏洞掃描
+scan:
+  stage: scan
+  script:
+    - yarn global add depcheck
+    - depcheck --json --ignores=eslint
+
+# build 階段：構建應用
 build:
   stage: build
   script:
     - yarn build
-    - tar zcvf frontend_demo.tar.gz build/
   artifacts:
     paths:
-      - "frontend_demo.tar.gz"
+      - build/
 
+# deploy 階段：將 artifacts 複製到遠程伺服器
 deploy:
   stage: deploy
-  before_script: []
   script: echo "deployment script!"
   when: manual
