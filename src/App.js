@@ -1,15 +1,11 @@
 import './App.css';
-import callErrorLog from './Api/log';
+import PageRouter from './Router/PageRouter';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <button onClick={() => callErrorLog()}>
-          Click Send Error Log
-        </button>
-      </header>
-    </div>
+  <>
+    <PageRouter />
+  </>
   );
 }
 
