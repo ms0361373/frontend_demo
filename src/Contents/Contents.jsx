@@ -7,6 +7,9 @@ function Content() {
       <Link to={'rwd'}>
         <div>RWD</div>
       </Link>
+      <Link to={'webSocket'}>
+        <div>WebSocket</div>
+      </Link>
     </>
   );
 }
